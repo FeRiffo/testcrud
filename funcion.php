@@ -18,14 +18,18 @@ $json = '{ "horarios": [{ "dia":"1", "horario":[ {"desde":"10:00", "hasta":"20:0
            "horario": []
        }
    ] }';
+
+   
 $data = json_decode($json);
+
 
 // Obtener la fecha y hora actuales
 $fechaHoraActual = date('2023-12-28 22:20:01');
 
+
 // Verificar horarios regulares
 $horariosRegulares = $data->horarios;
-$horarioEncontrado = false;
+$horarioEncontrado = true;
 
 foreach ($horariosRegulares as $horario) {
     $dia = $horario->dia;

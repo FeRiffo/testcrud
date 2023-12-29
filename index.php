@@ -2,7 +2,7 @@
 session_start();
 require_once('master.php');
 $master = new Master();
-$json_data = $master->get_all_data();
+$json_data = $master->getData();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,11 +79,11 @@ $json_data = $master->get_all_data();
                             <div class="d-flex justify-content-between">
                                 <div class="card-title col-auto flex-shrink-1 flex-grow-1">CRUD PHP con datos en JSON</div>
                                 <div class="col-atuo">
-                                    <a class="btn btn-danger btn-sm btn-flat" href="member_form.php"><i class="fa fa-plus-square"></i> Agregar Usuario</a>
+                                    <a class="btn btn-danger btn-sm btn-flat" href="member_form.php"><i class="fa fa-plus-square"></i> Agregar horario</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-center"> <h3 class="text-center">Lunes</h3> 
                             <div class="container-fluid">
                                 <table class="table table-stripped table-bordered">
                                     <colgroup>
@@ -94,26 +94,279 @@ $json_data = $master->get_all_data();
                                         <col width="20%">
                                     </colgroup>
                                     <thead>
+                                        
                                         <tr>
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center">Nombre</th>
-                                            <th class="text-center">N Contacto</th>
-                                            <th class="text-center">Dirección</th>
-                                            <th class="text-center">Acción</th>
+                                            
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
                                         </tr>
+                                        
                                     </thead>
+                                    
                                     <tbody>
                                         <?php foreach ($json_data as $data) : ?>
                                             <tr>
-                                                <td class="text-center"><?= $data->id ?></td>
-                                                <td><?= $data->name ?></td>
-                                                <td><?= $data->contact ?></td>
-                                                <td><?= $data->address ?></td>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                                                             
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
                                                 <td class="text-center">
-                                                    <a href="member_form.php?id=<?= $data->id ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
                                                         <i class="fa-solid fa-edit"></i>
                                                     </a>
-                                                    <a href="delete_data.php?id=<?= $data->id ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->name ?>?`) === false) event.preventDefault();">
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-body text-center"> <h3 class="text-center">Martes</h3> 
+                            <div class="container-fluid">
+                                <table class="table table-stripped table-bordered">
+                                    <colgroup>
+                                        <col width="5%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="35%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead>
+                                        
+                                        <tr>
+                                            <th class="text-center">horarios</th>
+                                            <th class="text-center">dia</th>
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php foreach ($json_data as $data) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                <td><?= $data->dia?></td>                                               
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
+                                                <td class="text-center">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-body text-center"> <h3 class="text-center">Miercoles</h3> 
+                            <div class="container-fluid">
+                                <table class="table table-stripped table-bordered">
+                                    <colgroup>
+                                        <col width="5%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="35%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead>
+                                        
+                                        <tr>
+                                            <th class="text-center">horarios</th>
+                                            <th class="text-center">dia</th>
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php foreach ($json_data as $data) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                <td><?= $data->dia?></td>                                               
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
+                                                <td class="text-center">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-body text-center"> <h3 class="text-center">Jueves</h3> 
+                            <div class="container-fluid">
+                                <table class="table table-stripped table-bordered">
+                                    <colgroup>
+                                        <col width="5%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="35%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead>
+                                        
+                                        <tr>
+                                            <th class="text-center">horarios</th>
+                                            <th class="text-center">dia</th>
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php foreach ($json_data as $data) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                <td><?= $data->dia?></td>                                               
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
+                                                <td class="text-center">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-body text-center"> <h3 class="text-center">Viernes</h3> 
+                            <div class="container-fluid">
+                                <table class="table table-stripped table-bordered">
+                                    <colgroup>
+                                        <col width="5%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="35%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead>
+                                        
+                                        <tr>
+                                            <th class="text-center">horarios</th>
+                                            <th class="text-center">dia</th>
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php foreach ($json_data as $data) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                <td><?= $data->dia?></td>                                               
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
+                                                <td class="text-center">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-body text-center"> <h3 class="text-center">Sábado</h3> 
+                            <div class="container-fluid">
+                                <table class="table table-stripped table-bordered">
+                                    <colgroup>
+                                        <col width="5%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="35%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead>
+                                        
+                                        <tr>
+                                            <th class="text-center">horarios</th>
+                                            <th class="text-center">dia</th>
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php foreach ($json_data as $data) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                <td><?= $data->dia?></td>                                               
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
+                                                <td class="text-center">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-body text-center"> <h3 class="text-center">Domingo</h3> 
+                            <div class="container-fluid">
+                                <table class="table table-stripped table-bordered">
+                                    <colgroup>
+                                        <col width="5%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="35%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead>
+                                        
+                                        <tr>
+                                            <th class="text-center">horarios</th>
+                                            <th class="text-center">dia</th>
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php foreach ($json_data as $data) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                <td><?= $data->dia?></td>                                               
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
+                                                <td class="text-center">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
                                                         <i class="fa-solid fa-trash"></i>
                                                     </a>
                                                 </td>

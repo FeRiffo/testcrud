@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($save['status'])) {
         if ($save['status'] == 'success') {
             if (isset($_POST['id']) && is_numeric($_POST['id']) && $_POST['id'] > 0)
-                $_SESSION['msg_success'] = 'Se ha agregado un nuevo miembro al archivo JSON con éxito';
+                $_SESSION['msg_success'] = 'Se ha agregado un nuevo horario al archivo JSON con éxito';
             else
-                $_SESSION['msg_success'] = 'Los detalles del miembro se han actualizado en el archivo JSON con éxito';
+                $_SESSION['msg_success'] = 'Los detalles del horario se han actualizado en el archivo JSON con éxito';
             header('location: ./');
             exit;
         }
@@ -113,22 +113,22 @@ $data = $master->get_data(isset($_GET['id']) ? $_GET['id'] : '');
                                 <form id="member-form" action="" method="POST">
                                     <input type="hidden" name="id" value="<?= isset($data->id) ? $data->id : '' ?>">
                                     <div class="mb-3">
-                                        <label for="name" class="form-label">Nombre del Usuario</label>
-                                        <input type="text" class="form-control rounded-0" id="name" name="name" required="required" value="<?= isset($data->name) ? $data->name : '' ?>">
+                                        <label for="name" class="form-label">dia</label>
+                                        <input type="text" class="form-control rounded-0" id="name" name="name" required="required" value="<?= isset($data->dia) ? $data->dia : '' ?>">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="contact" class="form-label">N de Contacto</label>
-                                        <input type="text" class="form-control rounded-0" id="contact" name="contact" required="required" value="<?= isset($data->contact) ? $data->contact : '' ?>">
+                                        <label for="contact" class="form-label">desde</label>
+                                        <input type="text" class="form-control rounded-0" id="contact" name="contact" required="required" value="<?= isset($data->desde) ? $data->desde : '' ?>">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="address" class="form-label">Dirección</label>
-                                        <textarea rows="3" class="form-control rounded-0" id="address" name="address" required="required"><?= isset($data->address) ? $data->address : '' ?></textarea>
+                                        <label for="address" class="form-label">hasta</label>
+                                        <textarea rows="3" class="form-control rounded-0" id="address" name="address" required="required"><?= isset($data->hasta) ? $data->hasta : '' ?></textarea>
                                     </div>
                                 </form>
                             </div>
                         </div>
                         <div class="card-footer text-center">
-                            <button class="btn btn-danger rounded-0" form="member-form"><i class="fa-solid fa-save"></i> Guardar Usuario</button>
+                            <button class="btn btn-danger rounded-0" form="member-form"><i class="fa-solid fa-save"></i> Guardar </button>
                             <a class="btn btn-light border rounded-0" href="./"><i class="fa-solid fa-times"></i> Cancelar</a>
                         </div>
                     </div>

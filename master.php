@@ -7,22 +7,22 @@ class Master
     /**
      * Obtener todos los datos JSON
      */
-    function get_all_data()
+    function getData()
     {
-        $json = json_decode(file_get_contents('data.json'));
-        return $json;
+       
+        return  json_decode(file_get_contents(__DIR__.'/data.json'));
     }
 
     /**
      * Obtener datos JSON únicos por día
      */
-    function get_data_by_day($day = '')
+    function getDataByid($horarios)
     {
-        $data = $this->get_all_data();
+        $data = 'getData()';
 
-        if (!empty($day)) {
+        if (!empty($horarios)) {
             foreach ($data->horarios as $horario) {
-                if ($horario->dia == $day) {
+                if ($horario->dia == $dia) {
                     return $horario;
                 }
             }
@@ -36,13 +36,13 @@ class Master
      */
     function insert_to_json()
     {
-        $day = $_POST['day'];
+        $dia = $_POST['dia'];
         $desde = addslashes($_POST['desde']);
         $hasta = addslashes($_POST['hasta']);
 
-        $data = $this->get_all_data();
+        $data = $this->getData();
         $newHorario = (object) [
-            "dia" => $day,
+            "dia" => $dia,
             "horario" => [
                 [
                     "desde" => $desde,
@@ -52,7 +52,7 @@ class Master
         ];
 
         // Verificar si ya existe un horario para este día
-        $existingHorario = $this->get_data_by_day($day);
+        $existingHorario = $this->getDataByid($dia);
 
         if (!empty($existingHorario)) {
             // Actualizar horario existente
@@ -82,14 +82,14 @@ class Master
      */
     function update_json_data()
     {
-        $day = $_POST['day'];
+        $dia = $_POST['dia'];
         $desde = addslashes($_POST['desde']);
         $hasta = addslashes($_POST['hasta']);
 
-        $data = $this->get_all_data();
+        $data = $this->getData();
 
         foreach ($data->horarios as $key => $horario) {
-            if ($horario->dia == $day) {
+            if ($horario->dia == $dia) {
                 $data->horarios[$key]->horario[] = [
                     "desde" => $desde,
                     "hasta" => $hasta
@@ -113,16 +113,16 @@ class Master
     /**
      * Eliminar datos del archivo JSON
      */
-    function delete_data($day = '')
+    function delete_data($dia = '')
     {
-        if (empty($day)) {
+        if (empty($dia)) {
             $resp['status'] = 'failed';
             $resp['error'] = 'El día dado está vacío.';
         } else {
-            $data = $this->get_all_data();
+            $data = $this->getData();
 
             foreach ($data->horarios as $key => $horario) {
-                if ($horario->dia == $day) {
+                if ($horario->dia == $dia) {
                     unset($data->horarios[$key]);
                     $json = json_encode($data, JSON_PRETTY_PRINT);
                     $update = file_put_contents('data.json', $json);

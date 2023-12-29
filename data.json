@@ -1,0 +1,83 @@
+{
+    "horarios": [
+        {
+            "dia": "1",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "20:00"
+                }
+            ]
+        },
+        {
+            "dia": "2",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "20:00"
+                }
+            ]
+        },
+        {
+            "dia": "3",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "20:00"
+                }
+            ]
+        },
+        {
+            "dia": "4",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "20:00"
+                }
+            ]
+        },
+        {
+            "dia": "5",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "20:00"
+                }
+            ]
+        },
+        {
+            "dia": "6",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "20:00"
+                }
+            ]
+        },
+        {
+            "dia": "7",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "19:00"
+                }
+            ]
+        }
+    ],
+  
+    "fechasEspeciales": [
+        {
+            "fecha": "2023-12-24",
+            "horario": [
+                {
+                    "desde": "10:00",
+                    "hasta": "19:00"
+                }
+            ]
+        },
+        {
+            "fecha": "2023-12-25",
+            "horario": []
+        }
+    ]
+}

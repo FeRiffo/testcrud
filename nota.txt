@@ -1,3 +1,48 @@
+ <div class="card-body text-center"> <h3 class="text-center">Martes</h3> 
+                            <div class="container-fluid">
+                                <table class="table table-stripped table-bordered">
+                                    <colgroup>
+                                        <col width="5%">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="35%">
+                                        <col width="20%">
+                                    </colgroup>
+                                    <thead>
+                                        
+                                        <tr>
+                                           
+                                            <th class="text-center">desde</th>
+                                            <th class="text-center">hasta</th>
+                                        </tr>
+                                        
+                                    </thead>
+                                    
+                                    <tbody>
+                                        <?php foreach ($json_data as $data) : ?>
+                                            <tr>
+                                                <td class="text-center"><?= $data->horarios?></td>                                               
+                                                <td><?= $data->dia?></td>                                               
+                                                <td><?= $data->desde?></td>
+                                                <td><?= $data->hasta?></td>
+                                                <td class="text-center">
+                                                    <a href="member_form.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-info rounded-0">
+                                                        <i class="fa-solid fa-edit"></i>
+                                                    </a>
+                                                    <a href="delete_data.php?id=<?= $data->horarios ?>" class="btn btn-sm btn-outline-danger rounded-0" onclick="if(confirm(`¿Deseas eliminar del registro a <?= $data->horarios ?>?`) === false) event.preventDefault();">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+
+
+
 class Master
 {
     /**
@@ -112,5 +157,11 @@ class Master
 
 
 
+$diaActual = date('2023-12-28 ');
+$horaActual = date("12:47:02");
 
+if ($horaActual>=$horaInicio) {
+    "esta dentro de horario";
+}
+echo "$horaInicio";
 

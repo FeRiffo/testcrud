@@ -16,7 +16,14 @@ $json = '{ "horarios": [{ "dia":"1", "horario":[ {"desde":"10:00", "hasta":"20:0
        {
            "fecha": "2023-12-25",
            "horario": []
-       }
+       },
+       {
+        "fecha": "Lunes",
+        "horario": [{
+            "desde": "12:00",
+            "hasta": "17:00"
+        }]
+    }
    ] }';
 
    
@@ -24,57 +31,80 @@ $data = json_decode($json);
 
 
 // Obtener la fecha y hora actuales
-$fechaHoraActual = date('2023-12-28 22:20:01');
+$horarioEncontrado = false ;
+$fechaHoraActual = date('2023-12-24 12:20:01');
+$fechaHoraActual = strtotime($fechaHoraActual);
+$diaActual = date("N", $fechaHoraActual);
+$horaActual = date("H:i",$fechaHoraActual);
+$fechaActual= date("Y-m-d",$fechaHoraActual);
 
+$fechasEspeciales = $data->fechasEspeciales;
 
-// Verificar horarios regulares
-$horariosRegulares = $data->horarios;
-$horarioEncontrado = true;
+foreach ($fechasEspeciales as $fechaEspecial) {
+    $fecha = $fechaEspecial-> fecha;
+    $horariosDia = $fechaEspecial-> horario;
+    
+if ($fechaActual == $fecha ) {
+    $fechaE= "si";
 
-foreach ($horariosRegulares as $horario) {
-    $dia = $horario->dia;
-    $horariosDia = $horario->horario;
 
     foreach ($horariosDia as $key => $value) {
         $desde = $value->desde;
         $hasta = $value->hasta;
 
-        $horaInicio = strtotime("$dia $desde");
-        $horaFin = strtotime("$dia $hasta");
+        if ($horaActual >= $desde and $horaActual< $hasta) {
+            $horarioEncontrado = true ;
 
-        if (strtotime($fechaHoraActual) >= $horaInicio && strtotime($fechaHoraActual) <= $horaFin) {
-            $horarioEncontrado = true;
-            break;
+          
+
         }
+
+
+      
+        
     }
+
 }
+    
+    }
+if ($fechaE == "") {
+    # code...
 
-// Verificar fechas especiales
-$fechasEspeciales = $data->fechasEspeciales;
+// Verificar horarios regulares
+$horariosRegulares = $data->horarios;
 
-foreach ($fechasEspeciales as $fechaEspecial) {
-    $fecha = $fechaEspecial->fecha;
-    $horarios = $fechaEspecial->horario;
 
-    foreach ($horarios as $key => $value) {
+foreach ($horariosRegulares as $horarios) {
+    $dia = $horarios-> dia;
+    $horariosDia = $horarios-> horario;
+    
+if ($diaActual == $dia) {
+    # code...
+
+
+    foreach ($horariosDia as $key => $value) {
         $desde = $value->desde;
         $hasta = $value->hasta;
 
-        $horaInicio = strtotime("$fecha $desde");
-        $horaFin = strtotime("$fecha $hasta");
+        if ($horaActual >= $desde and $horaActual< $hasta) {
+            $horarioEncontrado = true ;
 
-        if (strtotime($fechaHoraActual) >= $horaInicio && strtotime($fechaHoraActual) <= $horaFin) {
-            $horarioEncontrado = true;
-            break;
+            echo "desde=$desde, hasta= $hasta, horaActual=$horaActual ";
+
         }
+
+
+      
+        
     }
+
+}
+}
 }
 
-// Mostrar resultado
 if ($horarioEncontrado) {
     echo "La fecha y hora actual está dentro del horario de atención.";
 } else {
     echo "La fecha y hora actual está fuera del horario de atención.";
 }
 
-?>

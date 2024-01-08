@@ -1,11 +1,15 @@
 <?php
-$nombreDias[1]="Lunes";
-$nombreDias[2]="Martes";
-$nombreDias[3]="Miercoles";
-$nombreDias[4]="Jueves";
-$nombreDias[5]="Viernes";
-$nombreDias[6]="Sábado";
-$nombreDias[7]="Domingo";
+$nombreDias[1] = "Lunes";
+$nombreDias[2] = "Martes";
+$nombreDias[3] = "Miercoles";
+$nombreDias[4] = "Jueves";
+$nombreDias[5] = "Viernes";
+$nombreDias[6] = "Sábado";
+$nombreDias[7] = "Domingo";
+$fechaE[2023 - 12 - 24] = "2023-12-24";
+$fechaE[2023 - 12 - 25] = "2023-12-25";
+$fechaE[2024 - 01 - 01] = "2024-01-01";
+
 
 $json_data = '{
     "horarios": [
@@ -141,10 +145,22 @@ $json_data = '{
         },
         {
             "fecha": "2023-12-25",
-            "horario": []
+            "horario": [  {
+                "desde": "10:00",
+                "hasta": "20:00"
+            }]
+        },
+        {
+            "fecha": "2024-01-01",
+            "horario": [{
+                "desde": "12:00",
+                "hasta": "19:00"
+            }]
         }
     ]
 }';
+
+
 
 ?>
 <!DOCTYPE html>
@@ -173,11 +189,11 @@ $json_data = '{
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary bg-gradient">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger bg-gradient">
         <div class="container">
             <a class="navbar-brand" href="./">CRUD PHP con datos en JSON</a>
             <div>
-     
+
             </div>
         </div>
     </nav>
@@ -187,73 +203,192 @@ $json_data = '{
             <!-- Page Content Container -->
             <div class="col-lg-10 col-md-11 col-sm-12 mt-4 pt-4 mx-auto">
                 <div class="container-fluid">
-                    <!-- Handling Messages Form Session -->
-                    
+
+
                     <!--END of Handling Messages Form Session -->
                     <div class="card rounded-0 shadow">
                         <div class="card-header">
                             <div class="d-flex justify-content-between">
                                 <div class="card-title col-auto flex-shrink-1 flex-grow-1">CRUD PHP con datos en JSON</div>
-                                <div class="col-atuo">
-                                    <a class="btn btn-danger btn-sm btn-flat" href="member_form.php"><i class="fa fa-plus-square"></i> Agregar horario</a>
-                                </div>
+
                             </div>
                         </div>
-                        
-                        <div class="card-body text-center">
-                        <div class="container-fluid">
-                                
-                                    
-                                                                           
-                                      
-                            <?php
-                                        $data = json_decode($json_data);
-                                        $horariosRegulares = $data->horarios;
-                                        foreach ($horariosRegulares as $horarios){?> 
+
+                        <form  class="row g-3" action="mostrar.php" method="POST" onsubmit="guardarDatos()">
+                            <div class="container-fluid">
+
+                                <!-- Horarios Regulares -->
+                                <div class="card-body text-center">
+                                    <h3 class=""> Horarios Regulares </h3>
+                                    <?php
+                                    $data = json_decode($json_data);
+                                    $horariosRegulares = $data->horarios;
+                                    //echo $horariosRegulares;
+                                    $count = 0;
+                                    $count2 = 0;
+                                    foreach ($horariosRegulares as $horarios) {
+                                        $count++;
+                                        //echo $count;
+                                    ?>
+
                                         <table class="table table-stripped table-bordered ">
-                                        <tr>
-                                           <th class="text-center">Desde</th>
-                                           <th class="text-center">Hasta</th>  
-                                       </tr>
-                                       
-                                            
-                                        <?php $dia = $horarios ->dia;?>
-                                        <?php $horariosDia = $horarios-> horario;?>
-                                           <h3 class="text-center table table-stripped table-bordered bg-secondary  bg-gradient "><?php echo  $nombreDias[$dia] ?>
-                                        </h3>
-                                        <?php foreach ($horariosDia as $key =>$value){ ?>
                                             <tr>
-                                                
-                                                                                        
-                                                <td><?= $desde = $value->desde;?></td>
-                                                <td><?= $hasta = $value->hasta;?></td>
-                                                <td class="text-center">
-                                                    <a href="member_form.php?id=<?= $desde = $value->desde , $hasta = $value->hasta;  ?>" class="btn btn-sm btn-outline-info rounded-0">
-                                                        <i class="fa-solid fa-edit"></i>
-                                                    </a>
-                                                    <a href="delete_data.php?id=<?= $desde = $value->desde , $hasta = $value->hasta; ?>" class="btn btn-sm btn-outline-danger rounded-0"
-                                                     onclick="if(confirm(`¿Deseas eliminar el horario de <?= $desde = $value->desde ,' a ' , $hasta = $value->hasta; ?>?`) === false) 
-                                                     event.preventDefault();">
-                                                        <i class="fa-solid fa-trash"></i>
-                                                    </a>
-                                                </td>
+                                                <th class="text-center">Desde</th>
+                                                <th class="text-center">Hasta</th>
                                             </tr>
+
+                                            <?php $dia = $horarios->dia; ?>
+                                            <?php $horariosDia = $horarios->horario; ?>
+                                            <input type="text" value="<?= $nombreDias[$dia] ?>" name="dia<?= $count ?>" hidden>
+                                            <h3 class="text-center table table-stripped table-bordered bg-danger text-light bg-gradient "><?php echo $nombreDias[$dia] ?>
                                             
+                                            
+                                            </h3>
+                                            <?php foreach ($horariosDia as $key => $value) {
+
+                                                $count2++;
+                                            ?>
+
+                                                <tr id="column<?= $count2 ?>">
+
+                                                    <td>
+
+                                                        <input id="<?=$nombreDias[$dia]?>desde<?= $count2 ?>" name="desde<?= $count2 ?>" 
+                                                        type="text" class="form-control rounded-0" required="required" 
+                                                        value="<?= $desde = $value->desde;?>"
+                                                         onchange="cambiar('desde<?= $count2 ?>')">
+                                                    </td>
+                                                    <td>
+
+                                                        <input id="<?=$nombreDias[$dia]?>hasta<?= $count2 ?>" name="hasta<?= $count2 ?>"
+                                                         type="text" class="form-control rounded-0" required="required" 
+                                                         value="<?= $hasta = $value->hasta; ?>" 
+                                                         onchange="cambiar('hasta<?= $count2 ?>')">
+
+
+
+                                                    <td class="text-center">
+
+                                                        </a>
+                                                        <a id="deleteHorario<?=  $count2?>" 
+                                                        class="btn btn-sm btn-outline-danger rounded-0" 
+                                                        onclick="elimina('deleteHorario<?= $count2?>')">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </a>
+
+                                                        <a id="addHorario<?= $count2 ?>" 
+                                            class="btn btn-sm btn-outline-danger rounded-0 "
+                                                 onclick="agregar('addHorario<?= $count2?>')">
+                                                                <i class='far fa-plus-square'
+                                                                 style='font-size:20px;color:black'></i>
+                                                            </a>
+
+                                                    </td>
+                                                </tr>
+
+                                            <?php }; ?>
                                         <?php }; ?>
-                                        <?php }; ?> 
-                            
+
+
+
+                                </div>
+
+
+                                <!-- Fechas Especiales -->
+                                <div class="card-body text-center">
+                                <h3>Fechas Especiales
+                                        <a id="addFechaE" class="btn btn-danger btn-sm btn-flat" href="form.php"><i class="fa fa-plus-square"></i> Agregar Fecha Especial</a>
                                         
-                                    </thead>                                    
-                                    </tbody>
-                                </table>
+                                    </h3>
+                                
+                                    <?php
+
+                                    $data = json_decode($json_data);
+
+                                    $fechasEspeciales = $data->fechasEspeciales;
+
+                                    $count = 0;
+                                    $count3 = 0;
+
+                                    foreach ($fechasEspeciales as $fechaEspecial) {
+                                        $count++;
+                                        //echo $count; 
+                                    ?>
+                                        
+                                        <table class="table table-stripped table-bordered ">
+                                        
+                                            
+                                            <tr>
+                                                <th class="text-center">Desde</th>
+                                                <th class="text-center">Hasta</th>
+
+                                            </tr>
+
+
+
+                                            <?php $fecha = $fechaEspecial->fecha; ?>
+                                            <?php $horariosDia = $fechaEspecial->horario; ?>
+                                            <input type="text" value="<?= $fechaE = "$fecha" ?>" name="fecha<?= $count ?>" hidden>
+                                            <h3 class="text-center table table-stripped table-bordered bg-danger text-light bg-gradient "><?php echo  $fechaE = "$fecha" ?>
+                                            
+                                            <a id="addHorario<?= $count2 ?>" href="addHorario.php" class="btn btn-sm btn-outline-danger rounded-0 "
+                                                 onclick="agregar('addHorario<?= $count2?>')">
+                                                                <i class='far fa-plus-square' style='font-size:20px;color:black'></i>
+                                                            </a>
+
+                                            </h3>
+
+                                            <?php foreach ($horariosDia as $key => $value) {
+                                                $count3++;
+                                            ?>
+
+                                                <tr id="column<?= $count3 ?>">
+
+                                                    <td>
+
+                                                        <input id="desde<?= $count3 ?>" name="desde<?= $count3 ?>" type="text" class="form-control rounded-0" required="required" value="<?= $desde = $value->desde; ?>" onchange="cambiar('desde<?= $count3 ?>')">
+                                                    </td>
+                                                    <td>
+
+                                                        <input id="hasta<?= $count3 ?>" name="hasta<?= $count3 ?>" type="text" class="form-control rounded-0" required="required" value="<?= $hasta = $value->hasta; ?>" onchange="cambiar('hasta<?= $count3 ?>')">
+
+                                                    <td class="text-center">
+
+                                                    <a id="deleteHorario<?= $count3?>" 
+                                                        class="btn btn-sm btn-outline-danger rounded-0" 
+                                                        onclick="elimina('deleteHorario<?= $count3?>')">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </a>
+
+                                                    </td>
+
+                                                </tr>
+
+
+                                            <?php }; ?>
+                                        <?php }; ?>
+
+                                </div>
+
+
+
+
+
+
+
+
                             </div>
-                        </div>
+                            <input  type="submit" value="Guardar" class="btn btn-danger rounded-0" />     
+
+
+                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="./js/app.js"></script>
 </body>
 
 </html>

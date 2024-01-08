@@ -1,7 +1,4 @@
-<?php 
-
-
-$json = '{
+{
     "horarios": [
         {
             "dia": "1",
@@ -138,62 +135,4 @@ $json = '{
             "horario": []
         }
     ]
-}';
-
-   
-$data = json_decode($json);
-
-
-
-
-
-$fechasEspeciales = $data->fechasEspeciales;
-
-foreach ($fechasEspeciales as $fechaEspecial) {
-    $fecha = $fechaEspecial-> fecha;
-    $horariosDia = $fechaEspecial-> horario;
-       
-
-
-    foreach ($horariosDia as $key => $value) {
-        $desde = $value->desde;
-        $hasta = $value->hasta;
-
-       
-
-      
-        
-    }
-
 }
-    
-    
-
-
-// Verificar horarios regulares
-$horariosRegulares = $data->horarios;
-
-
-foreach ($horariosRegulares as $horarios) {
-    $dia = $horarios-> dia;
-    $horariosDia = $horarios-> horario;
-
-    echo "<br> dia=$dia";
-
-    
-
-
-
-    foreach ($horariosDia as $key => $value) {
-         $desde = $value->desde;
-        $hasta = $value->hasta;
-
-          echo "<br> --><input type='text' value='$desde' onchange='alert(this.value)'/>,
-           hasta = $hasta";
-      
-        
-    }
-
-}
-
-
